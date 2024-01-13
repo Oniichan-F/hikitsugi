@@ -1,2 +1,6 @@
-data/images/
-data/labels/
+data/images/*
+data/labels/*
+
+outputs/*.pth
+outputs/ckpt/*
+outputs/history/*
