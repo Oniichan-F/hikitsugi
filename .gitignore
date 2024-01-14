@@ -1,6 +1,4 @@
-data/images/*
-data/labels/*
+data/images/*.png
+data/labels/*.xlsx
 
 outputs/*.pth
-outputs/ckpt/*
-outputs/history/*
