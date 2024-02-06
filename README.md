@@ -83,13 +83,17 @@ excel整理はpandas, ディレクトリ一括取得はglobが便利です
 ## やること その4
 僕のくそ論文と関連研究を確認してください  
 関連研究があまりないので，探すの大変だと思います  
-"DeepPap: Deep Convolutional Networks for Cervical Cell Classification"  
+- "DeepPap: Deep Convolutional Networks for Cervical Cell Classification"  
+パパニコロウ染色の画像分類，口腔じゃないけど  
 https://arxiv.org/pdf/1801.08616.pdf  
-“Learning from multiple annotators for medical image segmentation”  
+- “Learning from multiple annotators for medical image segmentation”  
+複数医師のアノテーターを教師データにしたセグメンテーション  
 https://www.sciencedirect.com/science/article/pii/S0031320323001012  
-"Sample Efficient Learning of Image-Based Diagnostic Classifiers Using Probabilistic Labels”  
+- "Sample Efficient Learning of Image-Based Diagnostic Classifiers Using Probabilistic Labels”  
+確率的ラベルを使った学習  
 https://arxiv.org/abs/2102.06164  
-"Fusion of medical imaging and electronic health records using deep learning: a systematic review and implementation guidelines”  
+- "Fusion of medical imaging and electronic health records using deep learning: a systematic review and implementation guidelines”  
+モデル融合の戦略レビュー  
 https://www.nature.com/articles/s41746-020-00341-z  
 
 ## 引き継ぎ発表について
