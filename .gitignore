@@ -1,4 +1,4 @@
 data/images/*.png
 data/labels/*.xlsx
 
-outputs/*.pth
+tutorial/outputs/ckpt/*.pth
