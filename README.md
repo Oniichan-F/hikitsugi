@@ -80,6 +80,18 @@ excel整理はpandas, ディレクトリ一括取得はglobが便利です
 |OHSIL|2|0(positive)|
 |SCC|3|0(positive)|
 
+## やること その4
+僕のくそ論文と関連研究を確認してください  
+関連研究があまりないので，探すの大変だと思います  
+"DeepPap: Deep Convolutional Networks for Cervical Cell Classification"  
+https://arxiv.org/pdf/1801.08616.pdf  
+“Learning from multiple annotators for medical image segmentation”  
+https://www.sciencedirect.com/science/article/pii/S0031320323001012  
+"Sample Efficient Learning of Image-Based Diagnostic Classifiers Using Probabilistic Labels”  
+https://arxiv.org/abs/2102.06164  
+"Fusion of medical imaging and electronic health records using deep learning: a systematic review and implementation guidelines”  
+https://www.nature.com/articles/s41746-020-00341-z  
+
 ## 引き継ぎ発表について
 - 再アノテーションデータを整理する
 - ↑について，クラス分布，一致率などを可視化し，考察する
