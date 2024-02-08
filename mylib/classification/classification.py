@@ -46,8 +46,9 @@ def train(device, model, train_loader, valid_loader, num_classes, criterion, opt
     return losses, accs
 
 
-def train2(device, model, train_loader, valid_loader, num_classes, criterion, optimizer, scheduler=None, transforms=None):
+def train_distributed(device, model, train_loader, valid_loader, num_classes, criterion, optimizer, scheduler=None, transforms=None):
     losses, accs = {}, {}
+    softmax = nn.Softmax(dim=1)
     
     for phase in ['train', 'valid']:
         ep_loss = 0.0
@@ -74,9 +75,11 @@ def train2(device, model, train_loader, valid_loader, num_classes, criterion, op
             for i in range(len(y0)):
                 yy.append([y0[i], y1[i]])
             yy = torch.tensor(yy).float().to(device)
-            
+            yy = softmax(yy)
+
             with torch.set_grad_enabled(phase == 'train'):
                 outputs  = model(x)
+                outputs  = softmax(outputs)
                 loss     = criterion(outputs, yy)
                 _, preds = torch.max(outputs, 1)
                 
@@ -93,52 +96,6 @@ def train2(device, model, train_loader, valid_loader, num_classes, criterion, op
     if scheduler is not None: scheduler.step()
     
     return losses, accs
-
-
-def train3(device, model, train_loader, valid_loader, num_classes, criterion, optimizer, scheduler=None, transforms=None):
-    losses = {}
-    losses_A, losses_B, losses_C = {}, {}, {}
-    
-    for phase in ['train', 'valid']:
-        ep_loss, ep_loss_A, ep_loss_B, ep_loss_C = 0.0, 0.0, 0.0, 0.0
-        correct = 0
-        
-        if phase == 'train':
-            model.train()
-            loader = train_loader
-        elif phase == 'valid':
-            model.eval()
-            loader = valid_loader
-            
-        for x, y, _ in loader:
-            optimizer.zero_grad()
-            
-            if transforms is not None:
-                x = transforms(x)
-            
-            x = x.float().to(device)
-            
-            with torch.set_grad_enabled(phase == 'train'):
-                outputs = model(x)
-                loss, loss_sub  = criterion(outputs, y)
-                
-                if phase == 'train':
-                    loss.backward()
-                    optimizer.step()
-                    
-                ep_loss += loss.item() * x.size(0)
-                ep_loss_A += loss_sub[0] * x.size(0)
-                ep_loss_B += loss_sub[1] * x.size(0)
-                ep_loss_C += loss_sub[2] * x.size(0)
-                
-        losses[phase] = ep_loss / len(loader.dataset)
-        losses_A[phase] = ep_loss_A / len(loader.dataset)
-        losses_B[phase] = ep_loss_B / len(loader.dataset)
-        losses_C[phase] = ep_loss_C / len(loader.dataset)
-    
-    if scheduler is not None: scheduler.step()
-    
-    return losses, [losses_A, losses_B, losses_C]
 
 
 def test(device, model, test_loader, name_classes):

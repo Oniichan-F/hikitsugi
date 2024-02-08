@@ -38,6 +38,29 @@ class MyDataset(Dataset):
         counter /= len(self.labels)
 
         return counter    
+
+
+class MyDatasetWithoutCount(Dataset):
+    def __init__(self, images, labels, fnames, name_classes):
+        self.images       = images
+        self.labels       = labels
+        self.fnames       = fnames
+        self.name_classes = name_classes
+        self.num_classes  = len(name_classes)
+        
+    def __len__(self):
+        return len(self.fnames)
+    
+    def __getitem__(self, idx):
+        return self.images[idx], self.labels[idx], self.fnames[idx]
+            
+    def getRatio(self):
+        counter = np.zeros(self.num_classes)
+        for label in self.labels:
+            counter[label] += 1
+        counter /= len(self.labels)
+
+        return counter
     
 
 def getKFoldManager(x, y, n):
